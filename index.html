@@ -265,21 +265,136 @@
 
     <div class="container">
         
-        <section id="record" class="card">
-            <h2>身體發出的訊號</h2>
-            <div class="list-item">
-                <span class="paw-icon">🌪️</span>
-                <div>2025/12/15，起床時天旋地轉，吐出綠色膽汁。</div>
-            </div>
-            <div class="list-item">
-                <span class="paw-icon">🤕</span>
-                <div>兩週內4次劇烈偏頭痛(12/1、12/5、12/10)，最近一次(12/10)頭痛欲裂。</div>
-            </div>
-            <div class="list-item">
-                <span class="paw-icon">💉</span>
-                <div>急診打針熟睡後，症狀有緩解。</div>
-            </div>
-        </section>
+<section id="record" class="card">
+    <h2>📅 貓咪發病時間軸</h2>
+
+    <style>
+        .calendar-wrapper {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7天 */
+            gap: 4px;
+            text-align: center;
+            font-family: monospace;
+        }
+        .cal-head {
+            font-size: 0.75em;
+            color: #999;
+            padding-bottom: 4px;
+        }
+        .cal-day {
+            font-size: 0.85em;
+            padding: 6px 2px;
+            border-radius: 4px;
+            background: #f9f9f9;
+            color: #bbb;
+            min-height: 25px;
+            position: relative;
+        }
+        .cal-day.active {
+            color: #333;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+        
+        /* --- 修改後的樣式 --- */
+        
+        /* 1. 黃色：一般偏頭痛 (12/1, 12/5) */
+        .event-migraine {
+            background-color: #fff3cd !important;
+            color: #856404 !important;
+            border: 1px solid #ffeeba !important;
+            font-weight: bold;
+        }
+
+        /* 2. 淺紅色：劇烈頭痛 (12/10) */
+        .event-severe {
+            background-color: #ffcccc !important; /* 淺紅底 */
+            color: #cc0000 !important;            /* 深紅字 */
+            border: 1px solid #ffb3b3 !important;
+            font-weight: bold;
+        }
+
+        /* 3. 深紅色：大發作 (12/15) - 已移除放大效果 */
+        .event-vertigo {
+            background-color: #c0392b !important; /* 深紅底 */
+            color: #ffffff !important;            /* 白字 (高對比) */
+            border: 1px solid #96281b !important;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* 加上陰影增加份量感 */
+        }
+        
+        .cal-icon {
+            display: block;
+            font-size: 1.2em;
+            margin-top: 2px;
+        }
+    </style>
+
+    <div class="calendar-wrapper">
+        <div class="calendar-header">December 2025</div>
+        <div class="calendar-grid">
+            <div class="cal-head">Sun</div><div class="cal-head">Mon</div><div class="cal-head">Tue</div>
+            <div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div>
+
+            <div class="cal-day"></div> 
+            <div class="cal-day active event-migraine">1<span class="cal-icon">⚡</span></div>
+            <div class="cal-day active">2</div>
+            <div class="cal-day active">3</div>
+            <div class="cal-day active">4</div>
+            <div class="cal-day active event-migraine">5<span class="cal-icon">⚡</span></div>
+            <div class="cal-day active">6</div>
+
+            <div class="cal-day active">7</div>
+            <div class="cal-day active">8</div>
+            <div class="cal-day active">9</div>
+            <div class="cal-day active event-severe">10<span class="cal-icon">🤕</span></div>
+            <div class="cal-day active">11</div>
+            <div class="cal-day active">12</div>
+            <div class="cal-day active">13</div>
+
+            <div class="cal-day active">14</div>
+            <div class="cal-day active event-vertigo">15<span class="cal-icon">🌪️</span></div>
+            <div class="cal-day active">16</div>
+            <div class="cal-day active">17</div>
+            <div class="cal-day active">18</div>
+            <div class="cal-day active">19</div>
+            <div class="cal-day active">20</div>
+            
+            <div class="cal-day active">21</div><div class="cal-day active">22</div><div class="cal-day active">23</div>
+            <div class="cal-day active">24</div><div class="cal-day active">25</div><div class="cal-day active">26</div>
+            <div class="cal-day active">27</div><div class="cal-day active">28</div><div class="cal-day active">29</div>
+            <div class="cal-day active">30</div><div class="cal-day active">31</div>
+        </div>
+    </div>
+
+    <div class="list-item">
+        <span class="paw-icon">🌪️</span>
+        <div>
+            <strong>12/15 大發作：</strong><br>
+            起床天旋地轉，吐膽汁，急診打針後緩解。
+        </div>
+    </div>
+    <div class="list-item">
+        <span class="paw-icon">🤕</span>
+        <div>
+            <strong>12/10 前驅警報：</strong><br>
+            頭痛欲裂，之前已有兩次 (12/1、12/5) 偏頭痛發作，顯示神經已不穩定。
+        </div>
+    </div>
+</section>
 
 <section id="doctor" class="card">
     <h2>👨‍⚕️ 醫生杯杯的判斷與處方</h2>
