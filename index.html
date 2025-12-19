@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>揚寶寶乖乖健康手冊</title>
+    <style>
+        :root {
+            --bg-color: #FDFbf7; /* 奶油白背景 */
+            --card-bg: #FFFFFF;
+            --primary-text: #5D4037; /* 深咖啡色文字 */
+            --secondary-text: #8D6E63;
+            --accent-color: #FFAB91; /* 溫暖橘紅 */
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+            --highlight-bg: #FFF3E0;
+            --highlight-text: #E65100;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.6;
+            padding-bottom: 100px; /* 留給下方導覽列空間 */
+        }
+
+        .container {
+            max-width: 600px; /* 手機最佳寬度 */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0 25px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin-bottom: 8px;
+            letter-spacing: 1.2px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--secondary-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.2s ease;
+        }
+        
+        .card:active {
+            transform: scale(0.99);
+        }
+
+        h2 {
+            font-size: 18px;
+            color: var(--primary-text);
+            margin-bottom: 18px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .list-item {
+            margin-bottom: 14px;
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.5;
+        }
+
+        .paw-icon {
+            margin-right: 12px;
+            color: var(--accent-color);
+            min-width: 20px;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: inline-block;
+        }
+
+        /* Medicine Section */
+        .med-info {
+            background-color: #FBE9E7;
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 15px;
+            border: 1px solid #FFCCBC;
+        }
+
+        .med-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #D84315;
+            display: block;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .med-desc {
+            font-size: 14px; 
+            color: #5D4037;
+        }
+
+        /* Action Plan */
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(255, 243, 224, 0.3);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-num {
+            background-color: var(--accent-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            box-shadow: 0 2px 5px rgba(255, 171, 145, 0.4);
+        }
+
+        /* Footer Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 88%;
+            max-width: 380px;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 35px;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 30px rgba(93, 64, 55, 0.15);
+            z-index: 1000;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--accent-color);
+            background-color: rgba(255, 171, 145, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        /* Smooth Scroll & Animations */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .cat-decoration {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .care-note {
+            text-align: center; 
+            margin-top: 30px; 
+            font-size: 14px; 
+            color: #8D6E63;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="cat-decoration">🐱</div>
+        <h1>揚寶寶乖乖健康手冊</h1>
+        <div class="subtitle">
+            <span>🐾</span> 專屬護理紀錄 <span>🐾</span>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section id="record" class="card">
+            <h2>身體發出的訊號</h2>
+            <div class="list-item">
+                <span class="paw-icon">🌪️</span>
+                <div>2025/12/15，起床時天旋地轉，吐出綠色膽汁。</div>
+            </div>
+            <div class="list-item">
+                <span class="paw-icon">🤕</span>
+                <div>兩週內4次劇烈偏頭痛(12/1、12/5、12/10)，最近一次(12/10)頭痛欲裂。</div>
+            </div>
+            <div class="list-item">
+                <span class="paw-icon">💉</span>
+                <div>急診打針熟睡後，症狀有緩解。</div>
+            </div>
+        </section>
+
+<section id="doctor" class="card">
+    <h2>👨‍⚕️ 醫生杯杯的判斷與處方</h2>
+    
+    <div class="list-item">
+        <span class="paw-icon">👀</span>
+        <div>
+            <strong>檢查無眼震 ➔ 排除單純耳石脫落</strong>
+            <div style="font-size: 0.9em; color: #666; margin-top: 4px;">
+                如果是耳石脫落，眼球通常會不由自主顫動（眼震）。沒有眼震代表問題不在耳朵的「石頭」，而是<strong>大腦神經的「放電」</strong>不穩。
+            </div>
+        </div>
+    </div>
+
+    <div class="list-item">
+        <span class="paw-icon">🧠</span>
+        <div>
+            <strong>診斷：<span class="highlight">前庭性偏頭痛 (Vestibular Migraine)</span></strong>
+            <div style="font-size: 0.9em; color: #666; margin-top: 4px;">
+                神經系統處於「過度敏感」狀態。就像大腦裡的電線短路，雖然不一定會頭痛，但會用「暈眩、天旋地轉」來表現。
+            </div>
+        </div>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+
+    <div class="med-info">
+        <span class="med-name">💊 Flunarizine 5mg*2顆 (每晚睡前)</span>
+        <div class="med-desc">
+            這顆是神經內科的王牌！學名是「鈣離子通道阻斷劑」。
+            <ul style="margin: 8px 0 8px 20px; padding: 0; font-size: 0.9em; color: #555;">
+                <li><strong>防守機制：</strong>它像守門員，擋住鈣離子衝進血管，預防血管痙攣。</li>
+                <li><strong>雙重功效：</strong>同時預防偏頭痛發作 ＋ 治療前庭暈眩。</li>
+            </ul>
+
+            <div style="margin-top: 10px; padding: 12px; background-color: #fff3e0; border-radius: 8px; border: 1px dashed #ffb74d;">
+                <strong>🎯 任務指令：</strong><br>
+                1. <strong>吃滿兩週：</strong>藥效需要堆疊，不可因為不暈了就自行停藥（會反彈）。<br>
+                2. <strong>副作用是好事：</strong>會有「嗜睡、反應慢、呆呆的」感覺，這代表<strong>藥物正在強迫大腦關機修復</strong>，請安心睡覺。
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="plan" class="card">
+            <h2>兩週後的貓咪之約</h2>
+            <p style="margin-bottom: 20px; font-size: 15px; color: var(--secondary-text);">藥吃完後，請依照這三個步驟保護自己：</p>
+            
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <strong>自我評估回診</strong><br>
+                    <span style="font-size: 0.9em; color: #666;">帶著頭痛日記回診，讓醫生決定是否畢業，不要自己停藥喔。</span>
+                </div>
+            </div>
+            
+<div class="step">
+                <div class="step-num">2</div>
+<div>
+                    <strong>🛡️ 生活與飲食防護網</strong><br>
+                    <div style="font-size: 0.9em; color: #555; margin-top: 6px;">
+                        <strong>🚫 避開「食物 3C」地雷：</strong><br>
+                        <span style="color: #e74c3c;">✘</span> <strong>C</strong>heese (起司/乳酪)<br>
+                        <span style="color: #e74c3c;">✘</span> <strong>C</strong>itrus (柑橘/檸檬)<br>
+                        <span style="color: #e74c3c;">✘</span> <strong>C</strong>hocolate (巧克力)<br>
+                        <span style="font-size: 0.85em; color: #888;">(也要避開味精與加工肉品喔！)</span>
+                        
+                        <hr style="margin: 8px 0; border: 0; border-top: 1px dashed #ddd;">
+                        
+                        <strong>✅ 守住「生活 3C」防線：</strong><br>
+                        ☕ <strong>C</strong>affeine (咖啡因控制)<br>
+                        ⏰ <strong>C</strong>lock (固定作息不熬夜)<br>
+                        🌡️ <strong>C</strong>hanges (避免溫差、血糖波動)
+
+                        <div style="margin-top: 12px; padding: 10px; background-color: #fff9e6; border-left: 4px solid #ffc107; border-radius: 4px;">
+                            <strong>💡 重點筆記：</strong>
+                            <ul style="margin: 5px 0 0 15px; padding: 0; font-size: 0.9em; color: #666;">
+                                <li style="margin-bottom: 6px;">
+                                    <strong>飲食加強：</strong>除了 3C，也要小心 <span style="color: #e74c3c;">紅酒</span>、<span style="color: #e74c3c;">香腸臘肉</span>（硝酸鹽）與味精。建議多攝取鎂、B2 及高 Omega-3（如深海魚）、低 Omega-6 飲食。
+                                </li>
+                                <li>
+                                    <strong>咖啡因紅線：</strong>咖啡因會導致血管收縮，突然戒斷會引發頭痛。慢性偏頭痛者建議每日限制在 <strong>100毫克以內</strong>（約 1 杯小熱美或中杯拿鐵）。
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <strong>🥗 未來營養接手 (停藥後)</strong><br>
+                    <div style="font-size: 0.9em; color: #555; margin-top: 6px;">
+                        
+                        <div style="margin-bottom: 8px;">
+                            <strong>1. 鎂 (Magnesium)</strong> <span style="color: #f39c12;">⭐⭐⭐</span><br>
+                            <span style="font-size: 0.85em; color: #666;">
+                                📝 <strong>天然鎮定劑：</strong>放鬆緊繃肌肉，幫助神經穩定與睡眠。
+                            </span>
+                        </div>
+
+                        <div style="margin-bottom: 8px;">
+                            <strong>2. 維生素 B2</strong> <span style="color: #f39c12;">⭐⭐⭐</span><br>
+                            <span style="font-size: 0.85em; color: #666;">
+                                🔋 <strong>大腦電池：</strong>改善粒線體能量，預防偏頭痛發作。
+                            </span>
+                        </div>
+
+                        <div>
+                            <strong>3. 輔酶 Q10</strong> <span style="color: #f39c12;">⭐⭐</span><br>
+                            <span style="font-size: 0.85em; color: #666;">
+                                🛡️ <strong>神經防火牆：</strong>抗氧化、抗發炎，保護腦細胞。
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="care-note">
+            揚寶寶要健健康康沒貓病，和騰騰寶牽緊貓咪手！<br>
+            2025 ❤️
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#record" class="nav-item">
+            <span class="nav-icon">📝</span>
+            <span>紀錄</span>
+        </a>
+        <a href="#doctor" class="nav-item">
+            <span class="nav-icon">🩺</span>
+            <span>診斷</span>
+        </a>
+        <a href="#plan" class="nav-item">
+            <span class="nav-icon">📅</span>
+            <span>計畫</span>
+        </a>
+    </nav>
+
+    <script>
+        // Simple active state toggle for nav items
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Add highlight animation when hash changes or on load
+        function highlightSection() {
+            const hash = window.location.hash;
+            if(hash) {
+                const target = document.querySelector(hash);
+                if(target) {
+                    target.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        target.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            }
+        }
+
+        window.addEventListener('hashchange', highlightSection);
+    </script>
+</body>
+</html>
